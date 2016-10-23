@@ -1,0 +1,16 @@
+<div class="col-md-3 col-sm-6">
+                    <div class="single-shop-product" product_id="<%=product.id%>">
+                        <div class="product-upper">
+                        <%= image_tag product.image.url(:medium)%>
+                        </div>
+                        <h2><%= link_to product.name, product%></h2>
+                        <div class="product-carousel-price">
+                            <ins><%=product.price%></ins>
+                        </div>  
+                        
+                        <div class="product-option-shop">
+                        <%=link_to "Add to cart", line_items_path(:product_id=> product, :quantity=>1), method: :post, class:"add_to_cart_button", remote: true%>
+                            
+                        </div>                       
+                    </div>
+                </div>

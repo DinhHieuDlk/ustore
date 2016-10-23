@@ -1,0 +1,59 @@
+                       
+
+                             <form method="post" action="#">
+                                <table cellspacing="0" class="shop_table cart">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-remove">&nbsp;</th>
+                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-subtotal">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                         <%cart.line_items.each do |item|%>
+                                        <tr class="cart_item" id="line_item_cart_<%=item.id%>">
+                                            <td class="product-remove">
+                            
+                                                <%= link_to "x", line_item_path(item), method: :delete, class:"remove", title:"Remove this item", data:{ behavior: 'delete'}%>
+                                            </td>
+
+                                            <td class="product-thumbnail">
+                                            <%=link_to (image_tag item.product.image.url(:medium) ), product_path(item.product), class:"shop_thumbnail"%>
+                                               
+                                            </td>
+
+                                            <td class="product-name">
+                                               <%=link_to item.product.name, product_path(item.product)%>
+                                            </td>
+
+                                            <td class="product-price">
+                                                <span class="amount"><%=item.product.price%></span> 
+                                            </td>
+
+                                            <td class="product-quantity">
+                                                <div class="quantity buttons_added">
+                                                   <%=item.quantity%>
+                                                    
+                                                </div>
+                                            </td>
+
+                                            <td class="product-subtotal">
+                                                <span class="amount"><%=item.lineitem_price%></span> 
+                                            </td>
+                                        </tr>
+                                <%end%>
+                                        
+                                        <tr>
+                                            <td class="actions" colspan="6">
+                                                 <%= link_to "CONTINUE SHOPPING", products_path, class: 'btn btn-lg btn-primary'%>
+                                                 <%= link_to "EMPTY CART","#", class: 'btn btn-lg btn-primary'%>
+                                                 <%= link_to "CHECKOUT", root_path, class: 'btn btn-lg btn-primary' unless controller.controller_name == 'checkout'%>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>

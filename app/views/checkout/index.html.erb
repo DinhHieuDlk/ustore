@@ -1,0 +1,87 @@
+<div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+
+<div class="col-md-6">
+	<p><em>Your order is displayed in the shopping cart to the right.</em></p>
+	<%= form_for @order, url: {action: "place_order"} do  |f|%>
+		<fieldset>
+		<legend>Contact Information</legend>
+		<p>
+		<%= f.label :email%><br>
+		<%=f.text_field :email%>
+		</p>
+		<p>
+		<%= f.label :phone_number%><br>
+		<%=f.text_field :phone_number%>
+		</p>
+		</fieldset>
+		<fieldset>
+		<legend>Shipping Address</legend>
+		<p>
+		<%= f.label :ship_to_first_name%><br>
+		<%=f.text_field :ship_to_first_name%>
+		</p>
+		<p>
+		<%= f.label :ship_to_last_name%><br>
+		<%=f.text_field :ship_to_last_name%>
+		</p>
+		<p>
+		<%= f.label :ship_to_address%><br>
+		<%=f.text_field :ship_to_address%>
+		</p>
+		<p>
+		<%= f.label :ship_to_city%><br>
+		<%=f.text_field :ship_to_city%>
+		</p>
+		<p>
+		<%= f.label :ship_to_postal_code%><br>
+		<%= f.text_field :ship_to_postal_code %>
+		</p>
+		<p>
+		<%= f.label :ship_to_country%><br>
+		<%=country_select(:order, :ship_to_country, priority_countries: ['United States'])%>
+		</p>
+		</fieldset>
+		
+		<fieldset>
+<legend>Billing Information</legend>
+<p>
+<label for="order_card_type">Credit card type</label><br/>
+<select name="order[card_type]" id="order_card_type">
+<%= options_for_select([ "Visa", "MasterCard", "Discover" ], :card_type) %>
+</select>
+</p>
+<p>
+<%= f.label :card_expiration%><br>
+<%= f.date_select :card_expiration,:discard_day => true,:start_year => Date.today.year, :prompt => { :month => 'Select month', :year => 'Select year' }  %>
+</p>
+<p>
+<label for="order_card_number">Card number</label><br/>
+<%= f.text_field :card_number %>
+</p>
+<p>
+<label for="order_card_verification_value"> <abbr title="Card Verification Value">CVV</abbr>/ <abbr title="Card Validation Check">CVC</abbr>
+</label><br/>
+<%= f.text_field :card_verification_value %>
+</p>
+</fieldset>
+<p>
+<%= f.submit %>
+</p>
+	<% end%>
+	</div>
+
+	<div class="col-md-6">
+              	<div class="product-content-right">
+              		<div class="woocommerce">
+				<%=render :partial =>"carts/cart" , :object => current_cart%>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+</div>
+</div>

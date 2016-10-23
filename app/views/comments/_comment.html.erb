@@ -1,0 +1,33 @@
+<div class="comment" id="comment_<%=comment.id%>">
+<p>
+  <strong>Name:</strong>
+  <%= comment.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= comment.email %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <div class="star-rating" data-score= <%=comment.rating%> ></div>
+</p>
+
+<p>
+  <strong>Review:</strong>
+  <%= comment.review %>
+</p>
+<p>
+<%=link_to "destroy", product_comment_path(@product, comment), method: :delete, data:{confirm:"are you sure?", class:"btn btn-danger", remote:true}%></p>
+</div>
+
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+</script>

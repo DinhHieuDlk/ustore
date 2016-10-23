@@ -1,0 +1,19 @@
+<h3>Store Order</h3>
+<p>
+This is just to let you know that we've shipped your recent order:
+</p>
+<table>
+
+<tr>
+<th>product name</th>
+<th colspan="2" >Qty</th>
+<th>price</th>
+</tr>
+<%@line_item.each do |line_item|%>
+<tr>
+<td><%= line_item.product.name %></td>
+<td><%= line_item.amount %>&times;</td>
+<td class="item_price" ><%= number_to_currency(line_item.price) %></td>
+</tr>
+<%end%>
+</table>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card_number: 1
+  expiry_date: 2016-07-04 14:35:17
+  security_code: 
+  order_id: 
+
+two:
+  card_number: 1
+  expiry_date: 2016-07-04 14:35:17
+  security_code: 
+  order_id: 

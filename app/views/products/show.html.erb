@@ -1,0 +1,141 @@
+ <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Shop</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <%= render 'layouts/sidebar'%>
+                
+                <div class="col-md-8">
+                    <div class="product-content-right">
+                        <div class="product-breadcroumb">
+                            <a href="<%=root_path%>">Home</a>
+                            <%=link_to @product.category.name, products_path(category: @product.category.name )%>
+                            <a href=""><%=@product.name%></a>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="product-images">
+                                    <div class="product-main-img">
+                                        <%=image_tag @product.image.url(:medium)%>
+                                    </div>
+                                    
+                                    <div class="product-gallery">
+                                        <img src="img/product-thumb-1.jpg" alt="">
+                                        <img src="img/product-thumb-2.jpg" alt="">
+                                        <img src="img/product-thumb-3.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-6">
+                                <div class="product-inner">
+                                    <h2 class="product-name"><%=@product.name%></h2>
+                                    <div class="product-inner-price">
+                                        <ins><%=@product.price%></ins>
+                                    </div>    
+                                    <%=form_tag line_items_url, class:"cart" ,remote: true do%>
+                                    <div class="quantity">
+                                    <%=select_tag :quantity,options_for_select((1..18).to_a), class:"input-text qty text" %>
+                                    </div>
+                                    <%=hidden_field_tag :product_id, @product.id%>
+                                    <%=submit_tag "Add to cart",class:"add_to_cart_button" %>
+                                   
+                                    <%end%>
+                                    
+                                    <% if User.wishlist_product @product, current_user%>
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-heart" aria-hidden="true"></i> Remove</button>
+                                    <%else%>
+                                      <%= button_to controller: "wishlists", action: "create", product_id: @product.id do %>
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i> Wishlist
+                                      <%end%>
+                                    <%end%>
+
+                                    
+                                    <div class="product-inner-category">
+                                        <p>Category: <a href=""><%=@product.category.name%></a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
+                                    </div> 
+                                    
+                                    <div role="tabpanel">
+                                        <ul class="product-tab" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                <h2>Product Description</h2>  
+                                                <%=raw(@product.description)%>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="profile">
+                                                <div id = content>
+                                                <%= render @product.comments%>
+                                                </div>
+                                                <div id="comment">
+                                                <h2><%=link_to "new comments",:remote=>true%></h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="related-products-wrapper">
+                            <h2 class="related-products-title">Related Products</h2>
+                            <div class="related-products-carousel">
+                            <%@related_product.each do |product|%>
+                                <div class="single-product">
+                                    <div class="product-f-image">
+                                        <%=image_tag product.image.url(:medium)%>
+                                        <div class="product-hover">
+                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        </div>
+                                    </div>
+
+                                    <h2><%= link_to product.name, product_path(product)%></h2>
+
+                                    <div class="product-carousel-price">
+                                        <ins><%=product.price%></ins>
+                                    </div> 
+                                </div>
+                                 <%end%>                                
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+
+$(document).ready(function(){
+    $("#comment").click(function(){
+    $("#comment").hide().after('<%= j render("comments/form")%>')
+    });
+});
+</script>

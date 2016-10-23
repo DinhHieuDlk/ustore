@@ -1,0 +1,34 @@
+<%= form_for([@product, @product.comments.build], remote: true) do |f| %>
+  
+  <div class="submit-review", id="comment">
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="rating-chooser">
+     <p>Your rating</p>
+     <div class="rating-wrap-post">
+    <div id="star-rating"></div>
+  </div>
+  </div>
+  <div class="field">
+    <%= f.label :review %><br>
+    <%= f.text_area :review %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  </div>
+<% end %>
+
+<script>
+  $('#star-rating').raty({
+    path:'/assets/',
+    scoreName:'comment[rating]'
+  });
+</script>

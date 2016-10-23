@@ -1,0 +1,7 @@
+$(function(ajax){
+	 $('.zigzag-bottom').html("<%= escape_javascript(render partial: 'layouts/form_ajax')%>"); 
+
+	  setTimeout(function(){ 
+        $('.sweet-alert').fadeOut();}, 1000);
+	  $('.shopping-item').html('<a href="<%=cart_path(current_cart)%>">Cart - <span class="cart-amunt"><%=current_cart.total_price%></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><%=current_cart.total_quantity%></span></a>');
+})

@@ -1,0 +1,81 @@
+
+
+ <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Wish List</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Page title area -->
+
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+			<%if @wishlist.wishlist_items.any?%>
+				<div class="col-md-12">
+                    <div class="product-content-right">
+                        <div class="woocommerce">
+                            <form method="post" action="#">
+                                <table cellspacing="0" class="shop_table cart">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-remove">&nbsp;</th>
+                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <% @wishlist.wishlist_items.each do |item|%>
+                                        <tr class="cart_item" , id="wishlist_item_<%=item.id%>">
+                                            <td class="product-remove">
+
+                                                <%= link_to "x", wishlist_path(item), method: :delete, data:{confirm: "are you sure?"}, class:"remove", title:"Remove this item", remote: true%>
+                                            </td>
+
+                                            <td class="product-thumbnail">
+                                            <%=link_to (image_tag item.product.image.url(:medium) ), product_path(item.product), class:"shop_thumbnail"%>
+
+                                            </td>
+
+                                            <td class="product-name">
+
+                                               <%=link_to item.product.name, product_path(item.product)%>
+                                            </td>
+
+                                            <td class="product-price">
+                                                <span class="amount"><%=item.product.price%></span>
+                                            </td>
+
+                                        </tr>
+                                        <%end%>
+
+                                    </tbody>
+                                </table>
+                            </form>
+
+
+                        </div>
+                    </div>
+                    <%else%>
+                    <div class="col-md-12 ">
+                 <div class="col-md-offset-3">
+                    <div class="product-content-right">
+                        <div class="woocommerce">
+                            <h2>wishlist empty</h2>
+                        </div>
+                    </div>
+                    </div>
+                 </div>
+                </div>
+				<%end%>
+                </div>
+                </div>
+                </div>
