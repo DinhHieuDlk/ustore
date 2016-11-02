@@ -60,3 +60,4 @@ gem 'sweet-alert-confirm'
 gem 'faker'
 gem 'country_select'
 gem "cancan"
+gem 'will_paginate'

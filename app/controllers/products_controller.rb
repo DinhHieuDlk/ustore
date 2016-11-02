@@ -5,10 +5,10 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     if params[:category].blank?
-      @products = Product.all
+      @products = Product.paginate(:page => params[:page], :per_page => 10)
     else
       @category_id = Category.find_by(name: params[:category]).id
-      @products = Product.where(category_id: @category_id)
+      @products = Product.where(category_id: @category_id).paginate(:page => params[:page], :per_page => 10)
     end
 
   end
