@@ -1,5 +1,6 @@
 class Admin::ProductsController < Admin::ApplicationController
   load_and_authorize_resource
+  skip_load_resource :only => [:create]
   before_action :set_admin_product, only: [:show, :edit, :update, :destroy]
   # GET /admin/products
   # GET /admin/products.json

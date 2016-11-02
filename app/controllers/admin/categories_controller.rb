@@ -1,5 +1,6 @@
 class Admin::CategoriesController < Admin::ApplicationController
   load_and_authorize_resource
+  skip_load_resource :only => [:create]
   before_action :set_admin_category, only: [:show, :edit, :update, :destroy]
   # GET /admin/categories
   # GET /admin/categories.json
