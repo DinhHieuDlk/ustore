@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       namespace :admin do 
         get 'dashboard/index'
         resources :categories
-        resources :products
+        resources :products do
+          collection { post :import }
+        end
         resources :users
         resources :order , only:[:index, :show]
         get 'order/close/:id' => 'order#close', as: 'close_order'

@@ -61,6 +61,11 @@ class Admin::ProductsController < Admin::ApplicationController
       format.json { head :no_content }
     end
   end
+  def import
+    Product.import(params[:file])
+    redirect_to admin_products_path, notice:"update data successfully"
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

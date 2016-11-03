@@ -2,6 +2,10 @@
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
+            <%= form_tag  import_admin_products_path, multipart: true do  %>
+                <%= file_field_tag :file%>
+                <%= submit_tag 'import' %>
+            <%end%>
             <div class="row">
             <% @admin_products.each do |admin_product| %>
             <div class="product">
